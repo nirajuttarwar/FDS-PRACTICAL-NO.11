@@ -1,0 +1,39 @@
+def bubble_sort(a):
+  swap = 0
+  for i in range(len(a)):
+    for j in range(0,len(a)-i-1):
+      if a[j]>a[j+1]:
+        temp = a[j]
+        a[j]=a[j+1]
+        a[j+1]=temp
+        swap = 1
+    if not swap:
+        break
+  return a
+
+
+def bucket_sort(b):
+  high = max(b)
+  n = len(b)
+  size = high/n
+  buck = []
+  for i in range(n):           
+      buck.append([]) 
+  for i in range(n):            
+      j = int(b[i]/size)
+      if j != n:
+          buck[j].append(b[i])
+      else:
+          buck[n - 1].append(b[i])
+ 
+  for i in range(n):
+      bubble_sort(buck[i])
+      
+  res = []
+  for i in range(n):
+      res = res + buck[i]
+ 
+  return res
+ 
+b = [122,46,1,11,32,200]
+print(bucket_sort(b))
